@@ -100,7 +100,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout main
           echo "pre_merge_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          git merge --ff-only ${{ github.ref_name }} || git merge --no-edit ${{ github.ref_name }}
+          git merge --ff-only ${{ github.ref_name }} || \
+            git merge --no-edit -X theirs ${{ github.ref_name }}
           git push origin main
 
       - name: Check what changed

@@ -472,6 +472,19 @@ When a new embedding page is created (see New Embedding Page Setup Checklist), a
 > **--- END OF PHANTOM EDIT ---**
 ---
 
+## Merge Conflict Prevention (Auto-Merge Workflow)
+The auto-merge workflow merges claude/* branches into main using `git merge --ff-only` with a `-X theirs` fallback. The `-X theirs` strategy auto-resolves content conflicts by preferring the incoming branch.
+
+**Why this matters:** Every claude/* push triggers the workflow. If a prior workflow already merged a different claude branch into main (advancing main beyond this branch's fork point), a fast-forward is no longer possible. The fallback merge can hit content conflicts — especially in `CHANGELOG.md`, which is modified on every commit by the Pre-Commit Checklist. Without `-X theirs`, the merge fails with exit code 1, the auto-merge job fails, and the deploy job is skipped (its condition requires auto-merge success).
+
+**Why `-X theirs` is safe:** The claude branch is always branched from main and contains strictly newer changes. When both sides modify the same lines (e.g. CHANGELOG.md's `[Unreleased]` header timestamp), the claude branch's version is always the one we want. The `-X theirs` strategy resolves exactly this class of conflict — same-line edits where the incoming branch has the latest content.
+
+**What this does NOT cover:** If the conflict is structural (e.g. a file was deleted on main but modified on the branch), `-X theirs` may not produce the desired result. These cases are rare in the claude/* workflow and would need manual intervention.
+
+---
+> **--- END OF MERGE CONFLICT PREVENTION ---**
+---
+
 ## Execution Style
 - For clear, straightforward requests: **just do it** — make the changes, commit, and push without asking for plan approval
 - Only ask clarifying questions when the request is genuinely ambiguous or has multiple valid interpretations
