@@ -1,13 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "autoupdatehtmltemplate"
+title: "SAIS_PFC_Website"
 abstract: "A GitHub Pages deployment framework with automatic version polling, auto-refresh, and Google Apps Script embedding support."
 authors:
   - name: "ShadowAISolutions"
 type: software
 license: "All Rights Reserved"
-repository-code: "https://github.com/ShadowAISolutions/autoupdatehtmltemplate"
-url: "https://ShadowAISolutions.github.io/autoupdatehtmltemplate"
+repository-code: "https://github.com/ShadowAISolutions/SAIS_PFC_Website"
+url: "https://ShadowAISolutions.github.io/SAIS_PFC_Website"
 # Developed by: ShadowAISolutions
 
 
