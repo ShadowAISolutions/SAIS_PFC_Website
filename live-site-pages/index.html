@@ -3,11 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="build-version" content="01.00w">
+  <meta name="build-version" content="01.01w">
   <meta name="template-id" content="sais-aut-7f3e9b2d">
-  <title>CHANGE THIS PROJECT TITLE TEMPLATE</title>
+  <title>PFC Associates — D.C. Police &amp; Fire Clinic</title>
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; }
+    /* ── RESET & BASE ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #2c3345;
+      background: #f7f5f0;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TYPOGRAPHY ────────────────────────────────────────── */
+    h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; line-height: 1.25; }
+
+    /* ── SPLASH (preserved) ────────────────────────────────── */
     .splash {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       z-index: 10000; display: none; align-items: center; justify-content: center;
@@ -16,6 +31,8 @@
     .splash .splash-title { color: #fff; font: bold 36px/1 sans-serif; margin-bottom: 20px; }
     .splash img { max-width: 500px; max-height: 500px; }
     #splash-green { background: #1b5e20; }
+
+    /* ── VERSION INDICATOR (preserved) ─────────────────────── */
     #version-indicator {
       position: fixed; bottom: 8px; right: 8px; z-index: 9999;
       display: flex; align-items: center; gap: 6px;
@@ -31,12 +48,467 @@
     #version-indicator .dot.found    { background: #66bb6a; }
     #version-indicator .dot.error    { background: #ef5350; }
     @keyframes pulse { from { opacity: 1; } to { opacity: 0.4; } }
+
+    /* ── NAVIGATION ────────────────────────────────────────── */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(15, 24, 45, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(190, 165, 100, 0.15);
+      transition: background 0.3s;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: #e8e4db;
+    }
+    .nav-logo-img {
+      width: 44px; height: 44px;
+      background: rgba(190, 165, 100, 0.15);
+      border: 1px solid rgba(190, 165, 100, 0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #b8a06a; text-align: center;
+      overflow: hidden;
+    }
+    .nav-logo-img img { width: 100%; height: 100%; object-fit: contain; }
+    .nav-logo-text { font-family: Georgia, serif; font-size: 18px; letter-spacing: 0.5px; }
+    .nav-links { display: flex; gap: 6px; list-style: none; }
+    .nav-links a {
+      color: #b0aaa0; text-decoration: none; font-size: 13px;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      padding: 8px 14px; transition: color 0.25s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #c9a84c; }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 8px; color: #b0aaa0;
+    }
+    .nav-toggle svg { width: 24px; height: 24px; }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(170deg, #0f1830 0%, #162040 40%, #1a2a52 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 100px 32px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(190,165,100,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 600px at 80% 30%, rgba(100,130,190,0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      width: 110px; height: 110px; margin-bottom: 40px;
+      position: relative; z-index: 1;
+    }
+    .hero-badge-inner {
+      width: 100%; height: 100%;
+      border: 2px solid rgba(190, 165, 100, 0.35);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; background: rgba(190, 165, 100, 0.04);
+    }
+    .hero-badge-inner::before {
+      content: ''; position: absolute;
+      top: -6px; left: -6px; right: -6px; bottom: -6px;
+      border: 1px solid rgba(190, 165, 100, 0.12);
+    }
+    .hero-badge-placeholder {
+      font-size: 10px; color: #8a7d60; text-align: center;
+      padding: 8px; line-height: 1.3; letter-spacing: 0.5px;
+    }
+    .hero-badge-inner img { width: 80%; height: 80%; object-fit: contain; }
+    .hero-title {
+      font-family: Georgia, serif; color: #e8e4db;
+      font-size: clamp(28px, 5vw, 50px); font-weight: 400;
+      max-width: 700px; position: relative; z-index: 1;
+      margin-bottom: 24px;
+    }
+    .hero-subtitle {
+      color: #8a8475; font-size: 16px; max-width: 560px;
+      line-height: 1.8; position: relative; z-index: 1;
+      margin-bottom: 48px;
+    }
+    .hero-tagline {
+      position: relative; z-index: 1;
+      display: inline-block; padding: 16px 36px;
+      border-top: 1px solid rgba(190, 165, 100, 0.25);
+      border-bottom: 1px solid rgba(190, 165, 100, 0.25);
+    }
+    .hero-tagline span {
+      font-family: Georgia, serif;
+      color: #c9a84c; font-size: clamp(11px, 1.6vw, 14px);
+      letter-spacing: 4px; text-transform: uppercase;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 1;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 48px; margin: 0 auto;
+      background: linear-gradient(to bottom, rgba(190,165,100,0.4), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── SECTIONS ──────────────────────────────────────────── */
+    .section { padding: 88px 32px; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .section-alt { background: #f0ede6; }
+    .section-dark { background: #0f1830; color: #ddd8cc; }
+
+    .section-label {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: #b8a06a; margin-bottom: 16px; font-weight: 600;
+    }
+    .section-dark .section-label { color: #c9a84c; }
+
+    .section-heading {
+      font-size: clamp(26px, 3.5vw, 38px);
+      margin-bottom: 28px; color: #1a2240;
+    }
+    .section-dark .section-heading { color: #e8e4db; }
+
+    .section-text {
+      font-size: 17px; line-height: 1.85; color: #4a4a52;
+      max-width: 720px;
+    }
+    .section-dark .section-text { color: #a8a498; }
+
+    .gold-rule {
+      width: 48px; height: 2px;
+      background: #c9a84c; margin-bottom: 32px;
+    }
+    .section-dark .gold-rule { background: rgba(190, 165, 100, 0.5); }
+
+    /* ── WELCOME ───────────────────────────────────────────── */
+    .welcome { padding-top: 96px; }
+    .welcome-intro {
+      font-family: Georgia, serif;
+      font-size: clamp(20px, 2.8vw, 28px);
+      color: #1a2240; line-height: 1.5;
+      max-width: 680px; margin-bottom: 32px;
+    }
+
+    /* ── TWO-COLUMN LAYOUT ─────────────────────────────────── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: start;
+    }
+    .two-col-text { order: 1; }
+    .two-col-image { order: 2; }
+    .two-col.reverse .two-col-text { order: 2; }
+    .two-col.reverse .two-col-image { order: 1; }
+
+    /* ── IMAGE PLACEHOLDERS ────────────────────────────────── */
+    .img-placeholder {
+      background: #e8e4db;
+      border: 1px dashed #c4bfb2;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; color: #8a8475;
+      font-size: 13px; padding: 24px; line-height: 1.5;
+      min-height: 240px;
+    }
+    .img-placeholder-hero {
+      width: 100%; aspect-ratio: 16/9;
+      background: #1a2240; border-color: rgba(190,165,100,0.2);
+      color: #8a7d60; margin-top: 40px;
+    }
+    .img-placeholder-square { aspect-ratio: 1/1; }
+    .img-placeholder-wide { aspect-ratio: 3/2; }
+
+    /* ── MISSION ───────────────────────────────────────────── */
+    .mission-statement {
+      border-left: 3px solid #c9a84c;
+      padding: 32px 0 32px 36px;
+      margin-top: 12px;
+    }
+    .mission-statement .section-text {
+      font-family: Georgia, serif;
+      font-size: 19px; font-style: italic;
+      line-height: 1.85; color: #c0bbb0;
+    }
+
+    /* ── POLICY SECTION ────────────────────────────────────── */
+    .policy-block { margin-bottom: 48px; }
+    .policy-block:last-child { margin-bottom: 0; }
+    .policy-title {
+      font-family: Georgia, serif;
+      font-size: 22px; color: #1a2240;
+      margin-bottom: 16px;
+    }
+    .policy-text {
+      font-size: 15px; line-height: 1.9;
+      color: #5a5a62;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    .site-footer {
+      background: #0a1020;
+      padding: 56px 32px 40px;
+      text-align: center;
+    }
+    .footer-tagline {
+      font-family: Georgia, serif;
+      font-size: 13px; letter-spacing: 3.5px; text-transform: uppercase;
+      color: #c9a84c; margin-bottom: 32px;
+      opacity: 0.7;
+    }
+    .footer-rule {
+      width: 40px; height: 1px;
+      background: rgba(190, 165, 100, 0.25);
+      margin: 0 auto 28px;
+    }
+    .footer-copy {
+      font-size: 13px; color: #5a5868;
+      line-height: 1.7;
+    }
+    .footer-nav {
+      display: flex; justify-content: center; gap: 24px;
+      list-style: none; margin-bottom: 36px; flex-wrap: wrap;
+    }
+    .footer-nav a {
+      color: #706b62; text-decoration: none;
+      font-size: 12px; letter-spacing: 1.5px;
+      text-transform: uppercase; transition: color 0.25s;
+    }
+    .footer-nav a:hover { color: #c9a84c; }
+
+    /* ── SCROLL TO TOP ─────────────────────────────────────── */
+    .scroll-top {
+      position: fixed; bottom: 32px; left: 32px; z-index: 800;
+      width: 40px; height: 40px;
+      background: rgba(15, 24, 45, 0.85);
+      border: 1px solid rgba(190, 165, 100, 0.2);
+      color: #c9a84c; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    .scroll-top.visible {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .scroll-top svg { width: 16px; height: 16px; }
+
+    /* ── FADE-IN ANIMATIONS ────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 68px; left: 0; right: 0;
+        background: rgba(15, 24, 45, 0.98);
+        padding: 16px 0; gap: 0;
+        border-bottom: 1px solid rgba(190,165,100,0.15);
+      }
+      .nav-links.open a { padding: 14px 32px; }
+      .nav-toggle { display: block; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .two-col-text, .two-col.reverse .two-col-text { order: 1; }
+      .two-col-image, .two-col.reverse .two-col-image { order: 2; }
+      .section { padding: 64px 24px; }
+      .hero { padding: 100px 24px 72px; }
+      .hero-tagline span { letter-spacing: 2.5px; }
+      .mission-statement { padding-left: 24px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Splash screen (preserved from template) -->
   <div id="splash-green" class="splash"><div class="splash-title">Website Ready</div><img id="splash-logo" src="" alt=""></div>
 
-  <!-- YOUR PAGE CONTENT HERE -->
+  <!-- ── NAVIGATION ──────────────────────────────────────── -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-img">
+          <!-- PLACEHOLDER: Replace src with PFC_images/PFC_LOGO_4.png -->
+          <span class="hero-badge-placeholder">PFC<br>Logo</span>
+        </div>
+        <span class="nav-logo-text">PFC Associates</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Staff</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Links</a></li>
+        <li><a href="#">Bulletin</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-badge fade-up">
+      <div class="hero-badge-inner">
+        <!-- PLACEHOLDER: Replace with PFC_images/PFC_LOGO_4.png -->
+        <span class="hero-badge-placeholder">PFC Logo<br>Image</span>
+      </div>
+    </div>
+    <h1 class="hero-title fade-up">Welcome to PFC</h1>
+    <p class="hero-subtitle fade-up">
+      PFC Associates, a joint venture of Providence Hospital and the Washington Hospital Center,
+      initiated a unique privatization project with the government of the District of Columbia.
+    </p>
+    <div class="hero-tagline fade-up">
+      <span>Protecting and Serving Those Who Protect and Serve Us</span>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── WHO WE SERVE ────────────────────────────────────── -->
+  <section class="section welcome">
+    <div class="section-inner">
+      <div class="two-col">
+        <div class="two-col-text fade-up">
+          <div class="section-label">Who We Serve</div>
+          <div class="gold-rule"></div>
+          <p class="welcome-intro">
+            The Police &amp; Fire Clinic provides occupational and preventive medical services
+            to the District's more than 6,000 police officers and fire fighters.
+          </p>
+          <p class="section-text">
+            Our dedicated team of healthcare professionals understands the unique demands
+            placed on those who keep our city safe, and we are committed to supporting
+            their health and wellbeing at every stage of their careers.
+          </p>
+        </div>
+        <div class="two-col-image fade-up">
+          <!-- PLACEHOLDER: Image of clinic or first responders -->
+          <div class="img-placeholder img-placeholder-wide">
+            Image Placeholder<br>
+            <small>Clinic exterior or first responders photo</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OUR PARTNERSHIP ─────────────────────────────────── -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="two-col reverse">
+        <div class="two-col-text fade-up">
+          <div class="section-label">Our Partnership</div>
+          <div class="gold-rule"></div>
+          <h2 class="section-heading">A Partnership That Serves the City</h2>
+          <p class="section-text">
+            Our partnership with the District not only improves the quality of medical services
+            and increase productivity of the public safety force, but also results in significant
+            efficiencies and savings for the city.
+          </p>
+        </div>
+        <div class="two-col-image fade-up">
+          <!-- PLACEHOLDER: Image representing partnership or DC -->
+          <div class="img-placeholder img-placeholder-wide">
+            Image Placeholder<br>
+            <small>Partnership or D.C. cityscape photo</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OUR MISSION ─────────────────────────────────────── -->
+  <section class="section section-dark">
+    <div class="section-inner fade-up">
+      <div class="section-label">Our Mission</div>
+      <div class="gold-rule"></div>
+      <h2 class="section-heading">Why We Do What We Do</h2>
+      <div class="mission-statement">
+        <p class="section-text">
+          PFC Associates, LLC, will develop and practice innovative approaches to appraising,
+          initiating, maintaining, and restoring the physical, psychological and emotional
+          health of Police Officers, Firefighters and other members covered in the
+          District of Columbia whom we serve.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── POLICIES ────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label fade-up">Our Commitments</div>
+      <div class="gold-rule fade-up"></div>
+      <h2 class="section-heading fade-up">Trust &amp; Confidentiality</h2>
+
+      <div class="policy-block fade-up">
+        <h3 class="policy-title">PFC's Confidentiality Policy</h3>
+        <p class="policy-text">
+          PFC's health care providers and staff are committed to maintaining confidentiality
+          at the Police and Fire Clinic. Records are maintained in accordance with the statutory
+          provisions of the Comprehensive Merit Personnel Act and the implementing regulations
+          found in the District Personnel Manual. Clinical staff adhere to the American College
+          of Occupational and Environmental Medicine's Code of Ethical Conduct, which is aimed
+          at protecting the privacy of employee medical information.
+        </p>
+      </div>
+
+      <div class="policy-block fade-up">
+        <h3 class="policy-title">Ethical Guidelines</h3>
+        <p class="policy-text">
+          In addition, the Behavioral Health Service follow the ethical guidelines put forth by
+          the American Psychological Association Ethical Principles of Psychologists and Code of
+          Conduct, Title IV District of Columbia Code-Mental Health Information Act, Psychological
+          Guidelines for Issues in Law Enforcement, Police Psychological Services Section,
+          International Association of Chiefs of Police.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-tagline">Protecting and Serving Those Who Protect and Serve Us</div>
+    <ul class="footer-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Staff</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Links</a></li>
+      <li><a href="#">Bulletin</a></li>
+    </ul>
+    <div class="footer-rule"></div>
+    <p class="footer-copy">
+      Copyright &copy; PFC Associates, LLC / D.C. Police &amp; Fire Clinic. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- ── SCROLL TO TOP ───────────────────────────────────── -->
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
 
   <script>
     /* tpl:7f3e9b2d */ // ── CONFIG ──────────────────────────────────────────────────────────
@@ -213,27 +685,31 @@
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'visible') requestWakeLock();
     });
+
+    // ── PAGE INTERACTIONS ─────────────────────────────────────────────
+    // Scroll-to-top button visibility
+    var scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) scrollBtn.classList.add('visible');
+      else scrollBtn.classList.remove('visible');
+    }, { passive: true });
+
+    // Fade-in on scroll (IntersectionObserver)
+    var fadeEls = document.querySelectorAll('.fade-up');
+    if ('IntersectionObserver' in window) {
+      var fadeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      fadeEls.forEach(function(el) { fadeObserver.observe(el); });
+    } else {
+      fadeEls.forEach(function(el) { el.classList.add('visible'); });
+    }
   </script>
 </body>
 </html>
 <!-- Developed by: ShadowAISolutions -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

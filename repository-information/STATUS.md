@@ -4,7 +4,7 @@
 
 | Page | File | Version | Live URL | Status |
 |------|------|---------|----------|--------|
-| Landing Page | `live-site-pages/index.html` | v01.00w | [View](https://ShadowAISolutions.github.io/SAIS_PFC_Website/) | Active |
+| Landing Page | `live-site-pages/index.html` | v01.01w | [View](https://ShadowAISolutions.github.io/SAIS_PFC_Website/) | Active |
 
 ## GAS Projects
 
